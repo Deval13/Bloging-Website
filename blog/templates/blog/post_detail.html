@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="container">
+        <div class="post-content mt-3 border-2 border-bottom border-dark">
+            <div class="row g-3 justify-content-between">
+                <div class="col col-1">
+                    <a href="{% url 'user-posts' object.author.username %}">
+                        <img width="70" class="rounded-circle" src="{{ object.author.profile.image.url }}">
+                    </a>
+                </div>
+                <div class="col col-7">
+                    <h3>
+                        {{ object.title }}
+                    </h3>
+                </div>
+                <div class="col">
+                    <h5 class="text-end text-primary text-opacity-90">
+                        By <a href="{% url 'user-posts' object.author.username %}" class="text-decoration-none">{{ object.author }}</a>
+                        <tab>
+                        <small class="text-primary text-opacity-75">on {{ object.date_posted|date:"F d, Y" }}</small>
+                    </h5>
+                </div>
+            </div>
+    
+            <div class="text-black mt-2 mb-2">
+                <h5>
+                {{ object.content }}
+            </h5>
+            </div>
+            {% if object.author == user %}
+                <div class="form-group my-1">
+                    <a href="{% url 'post-update' object.id %}" class="btn btn-outline-info mx-2">Update</a>
+                    <a href="{% url 'post-delete' object.id %}" class="btn btn-outline-danger mx-1">Delete</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

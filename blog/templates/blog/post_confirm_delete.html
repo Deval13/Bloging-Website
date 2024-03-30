@@ -1,0 +1,16 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <div class="form-group">
+        <h2 class="text-center mt-5">Are you want to DELETE {{ object.title }}?</h2>
+        </div>
+    </fieldset>
+    <div class="form-group text-center mt-5">
+        <button type="submit" class="btn btn-outline-danger mx-1">Yes, Delete</button>
+        <a href="{% url 'post-detail' object.id %}" class="btn btn-outline-secondary mx-2">Cancel</a>
+    </div>
+</form>
+{% endblock content %}
